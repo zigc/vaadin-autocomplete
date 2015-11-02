@@ -5,22 +5,20 @@ import com.zybnet.autocomplete.shared.AutocompleteFieldSuggestion;
 
 public class OracleSuggestionImpl implements Suggestion {
   
-  private final String displayString;
   private final AutocompleteFieldSuggestion wrappedSuggestion;
   
   public OracleSuggestionImpl(AutocompleteFieldSuggestion wrappedSuggestion) {
     this.wrappedSuggestion = wrappedSuggestion;
-    this.displayString = wrappedSuggestion.getDisplayString();
   }
 
   @Override
   public String getDisplayString() {
-    return displayString;
+    return wrappedSuggestion.getDisplayString() + (wrappedSuggestion.getDescription() != null ? (wrappedSuggestion.getDescriptionSeparator() + wrappedSuggestion.getDescription()) : "");
   }
 
   @Override
   public String getReplacementString() {
-    return displayString;
+    return wrappedSuggestion.getDisplayString();
   }
   
   public AutocompleteFieldSuggestion getWrappedSuggestion() {

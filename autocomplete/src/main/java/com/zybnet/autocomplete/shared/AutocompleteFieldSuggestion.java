@@ -7,6 +7,7 @@ public class AutocompleteFieldSuggestion implements Serializable {
   
   private Integer id;
   private String displayString;
+  private String description;
 
   public String getDisplayString() {
     return displayString;
@@ -24,4 +25,11 @@ public class AutocompleteFieldSuggestion implements Serializable {
     this.displayString = displayString;
   }
   
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
 }

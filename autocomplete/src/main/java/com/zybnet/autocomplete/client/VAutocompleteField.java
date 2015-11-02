@@ -59,6 +59,11 @@ public class VAutocompleteField extends Composite implements KeyUpHandler, Focus
   private class SuggestOracleImpl extends SuggestOracle {
 
     @Override
+    public boolean isDisplayStringHTML() {
+      return true;
+    }
+    
+    @Override
     public void requestSuggestions(Request request, Callback callback) {
       if (isInitiatedFromServer) {
         // invoke the callback

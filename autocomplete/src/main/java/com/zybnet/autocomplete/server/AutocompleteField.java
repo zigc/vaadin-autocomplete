@@ -85,12 +85,17 @@ public class AutocompleteField<E> extends AbstractField<String> implements Autoc
   }
 
   public void addSuggestion(E id, String title) {
+    addSuggestion(id, title, null);
+  }
+  
+  public void addSuggestion(E id, String title, String description) {
     int index = getState().suggestions.size();
     items.put(index, id);
     List<AutocompleteFieldSuggestion> newSuggestionList = new ArrayList<AutocompleteFieldSuggestion>(getState().suggestions);
     AutocompleteFieldSuggestion suggestion = new AutocompleteFieldSuggestion();
     suggestion.setId(index);
     suggestion.setDisplayString(title);
+    suggestion.setDescription(description);
     newSuggestionList.add(suggestion);
     getState().suggestions = newSuggestionList;
   }

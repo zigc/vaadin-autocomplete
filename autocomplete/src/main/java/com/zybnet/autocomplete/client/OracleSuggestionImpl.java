@@ -15,7 +15,9 @@ public class OracleSuggestionImpl implements Suggestion {
 
   @Override
   public String getDisplayString() {
-    return displayString;
+    return "<span class=\"autocomplete-item\"><span class=\"display\">" + displayString + "</span>"
+      + (wrappedSuggestion.getDescription() != null ? ("<span class=\"description\">" + wrappedSuggestion.getDescription() + "</span>") : "")
+      + "</span>";
   }
 
   @Override

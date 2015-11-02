@@ -22,7 +22,7 @@ import com.zybnet.autocomplete.shared.AutocompleteFieldSuggestion;
 
 public class VAutocompleteField extends Composite implements KeyUpHandler, Focusable {
 
-  public static final String CLASSNAME = "v-autocomplete";
+  public static final String CLASSNAME = "v-autocomplete v-textfield";
   
   private final SuggestOracle oracle;
   private final SimpleSuggestionsDisplay suggestionsDisplay;
@@ -58,6 +58,11 @@ public class VAutocompleteField extends Composite implements KeyUpHandler, Focus
 
   private class SuggestOracleImpl extends SuggestOracle {
 
+    @Override
+    public boolean isDisplayStringHTML() {
+      return true;
+    }
+    
     @Override
     public void requestSuggestions(Request request, Callback callback) {
       if (isInitiatedFromServer) {

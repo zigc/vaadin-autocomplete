@@ -18,6 +18,7 @@ public class AutocompleteField<E> extends AbstractField<String> implements Autoc
   private AutocompleteSuggestionPickedListener<E> suggestionPickedListener;
   private Map<Integer, E> items = new HashMap<Integer, E>();
   private int syncId = 0;
+  private String descriptionSplitString = " - ";
 
   public AutocompleteField() {
     registerRpc(this, AutocompleteServerRpc.class);
@@ -85,14 +86,24 @@ public class AutocompleteField<E> extends AbstractField<String> implements Autoc
   }
 
   public void addSuggestion(E id, String title) {
+    addSuggestion(id, title, null);
+  }
+
+  public void addSuggestion(E id, String title, String description) {
     int index = getState().suggestions.size();
     items.put(index, id);
     List<AutocompleteFieldSuggestion> newSuggestionList = new ArrayList<AutocompleteFieldSuggestion>(getState().suggestions);
     AutocompleteFieldSuggestion suggestion = new AutocompleteFieldSuggestion();
     suggestion.setId(index);
     suggestion.setDisplayString(title);
+    suggestion.setDescription(description);
+    suggestion.setDescriptionSeparator(descriptionSplitString);
     newSuggestionList.add(suggestion);
     getState().suggestions = newSuggestionList;
+  }
+  
+  public void setDescriptionSplitString(String descriptionSplitString) {
+    this.descriptionSplitString = descriptionSplitString;
   }
   
   public void setMinimumQueryCharacters(int minimumQueryCharacters) {

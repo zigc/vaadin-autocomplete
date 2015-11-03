@@ -22,7 +22,7 @@ import com.zybnet.autocomplete.shared.AutocompleteFieldSuggestion;
 
 public class VAutocompleteField extends Composite implements KeyUpHandler, Focusable {
 
-  public static final String CLASSNAME = "v-autocomplete";
+  public static final String CLASSNAME = "v-autocomplete v-textfield";
   
   private final SuggestOracle oracle;
   private final SimpleSuggestionsDisplay suggestionsDisplay;

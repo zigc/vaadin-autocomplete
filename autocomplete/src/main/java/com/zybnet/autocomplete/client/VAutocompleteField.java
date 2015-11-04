@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.BlurHandler;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
@@ -18,11 +21,15 @@ import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.vaadin.client.Focusable;
 import com.vaadin.client.ui.VTextField;
+import com.vaadin.shared.EventId;
 import com.zybnet.autocomplete.shared.AutocompleteFieldSuggestion;
 
 public class VAutocompleteField extends Composite implements KeyUpHandler, Focusable {
-
-  public static final String CLASSNAME = "v-autocomplete v-textfield";
+  
+  /**
+   * The input node CSS classname.
+   */
+  public static final String CLASSNAME = "v-autocomplete";
   
   private final SuggestOracle oracle;
   private final SimpleSuggestionsDisplay suggestionsDisplay;
@@ -46,7 +53,7 @@ public class VAutocompleteField extends Composite implements KeyUpHandler, Focus
     suggestBox = new SuggestBox(oracle, textField, suggestionsDisplay);
     initWidget(suggestBox);
     suggestBox.getValueBox().addKeyUpHandler(this);
-    setStyleName(CLASSNAME);
+    addStyleName(CLASSNAME);
   }
 
   @Override
@@ -170,6 +177,8 @@ public class VAutocompleteField extends Composite implements KeyUpHandler, Focus
   public void onKeyUp(KeyUpEvent event) {
     
     if (textChangeHandler != null) textChangeHandler.onTextChange(suggestBox.getText());
+    
+    textField.setText(suggestBox.getText());
     
     switch (event.getNativeKeyCode()) {
     case KeyCodes.KEY_ESCAPE:

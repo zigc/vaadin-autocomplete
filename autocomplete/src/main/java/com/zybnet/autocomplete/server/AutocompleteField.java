@@ -7,12 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.vaadin.ui.AbstractField;
+import com.vaadin.ui.AbstractTextField;
 import com.zybnet.autocomplete.shared.AutocompleteServerRpc;
 import com.zybnet.autocomplete.shared.AutocompleteState;
 import com.zybnet.autocomplete.shared.AutocompleteFieldSuggestion;
 
 @SuppressWarnings("serial")
-public class AutocompleteField<E> extends AbstractField<String> implements AutocompleteServerRpc {
+public class AutocompleteField<E> extends AbstractTextField implements AutocompleteServerRpc {
   
   private AutocompleteQueryListener<E> queryListener;
   private AutocompleteSuggestionPickedListener<E> suggestionPickedListener;
@@ -21,6 +22,7 @@ public class AutocompleteField<E> extends AbstractField<String> implements Autoc
 
   public AutocompleteField() {
     registerRpc(this, AutocompleteServerRpc.class);
+    setNullRepresentation("");
   }
   
   @Override
@@ -40,6 +42,7 @@ public class AutocompleteField<E> extends AbstractField<String> implements Autoc
   
   public void onQuery(String query) {
     setSyncId(syncId++);
+    setText(query);
     clearChoices();
     if (queryListener != null) {
       queryListener.handleUserQuery(this, query);

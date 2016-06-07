@@ -3,3 +3,8 @@ sudo: false
 script:
  - cd autocomplete
  - mvn clean install
+ 
+ - cd ../demo
+ - mvn clean
+ - mvn package
+ - mvn jetty:run

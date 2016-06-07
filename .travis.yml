@@ -5,6 +5,4 @@ script:
  - mvn clean install
  
  - cd ../demo
- - mvn clean
- - mvn package
- - mvn jetty:run
+ - mvn clean package
